@@ -1,0 +1,35 @@
+'''
+Create an abbreviation: take first letters of each word, uppercase them.
+
+Input Format
+
+a line with 2–10 words.
+
+Constraints
+
+words contain letters and single space only.
+
+Output Format
+
+abbreviation string.
+
+Sample Input 0
+
+independence day
+Sample Output 0
+
+ID
+Sample Input 1
+
+International Yoga Day
+Sample Output 1
+
+IYD
+'''
+
+s = input()
+
+# Split the string into words and take the first letter of each
+abbreviation = ''.join([word[0].upper() for word in s.split()])
+
+print(abbreviation)
