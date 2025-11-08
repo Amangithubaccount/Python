@@ -1,0 +1,60 @@
+'''
+The witches of Umbra Valley forged not one but many cursed necklaces, each strung with glowing beads etched in both upper and lower case letters. These necklaces were designed to trap mortals in layers of repetition and disorder.
+
+The blacksmith-sorcerer’s challenge is no longer simple. To break the curse, he must follow all of these purification rules:
+
+First Occurrence Rule: Keep only the first appearance of each bead (character).
+Order Rule: Preserve the original order of the necklace; no rearranging is allowed.
+Case-Sensitive Rule: Uppercase and lowercase beads are treated as different entities ('A' ≠ 'a').
+Multi-Necklace Rule: If multiple necklaces are given (separated by spaces), each must be purified individually, then joined back with a single space.
+Empty Necklace Rule: If, after purification, a necklace becomes empty (all duplicates), print "EMPTY" for that necklace.
+Only if all these conditions are met will the blacksmith reveal the true purified collection of necklaces and end the witches’ reign.
+
+Input Format
+
+A single string.
+
+Constraints
+
+1 ≤ length ≤ 2000
+
+Output Format
+
+A string without duplicates.
+
+Sample Input 0
+
+banana
+Sample Output 0
+
+['b', 'a', 'n']
+Sample Input 1
+
+hello world
+Sample Output 1
+
+['h', 'e', 'l', 'o', ' ', 'w', 'r', 'd']
+'''
+
+def purify_necklace(necklace):
+    seen = set()
+    purified = []
+    for bead in necklace:
+        if bead not in seen:
+            seen.add(bead)
+            purified.append(bead)
+    return purified if purified else ["EMPTY"]
+
+# Read input string (multiple necklaces separated by spaces)
+input_str = input().rstrip('\n')
+
+# Split by spaces to handle multiple necklaces
+necklaces = input_str.split(' ')
+
+# Purify each necklace individually
+purified_necklaces = [purify_necklace(n) for n in necklaces]
+
+# Format output as list of characters for each necklace, joined by spaces
+output = ' '.join(str(p) for p in purified_necklaces)
+
+print(output)
