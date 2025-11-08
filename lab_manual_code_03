@@ -1,0 +1,22 @@
+# WAP to reverse every kth row of a matrix
+
+row = int(input("enter the number of rows"))
+mat=[]
+
+for i in range(row):
+    r=[]
+    for j in range(row):
+        num=int(input("enter a number"))
+        r.append(num)
+    mat.append(r)
+    
+for i in mat:
+    print(i)
+    
+k=int(input("enter kth row")) - 1
+for i in range(len(mat)):
+    if i==k:
+        mat[i]=mat[i][::-1]
+        
+for i in mat:
+    print (i)
