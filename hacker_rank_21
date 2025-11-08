@@ -1,0 +1,48 @@
+'''
+n the kingdom of Aldoria, King Aldric’s orders were secrets that could decide the fate of battles. To prevent spies from understanding his messages, he developed a clever cipher: every word in a message was rotated to the right by a certain number of letters k.
+
+Even if a spy intercepted a message, the words would appear scrambled and meaningless. Only trusted cryptographers could decode the orders by reversing the rotation.
+
+Now, the king has entrusted you with this critical task. Your mission is to encrypt or decrypt messages using the rotation logic so that only the intended recipients can read them. One mistake could mislead generals and endanger the kingdom. Can you preserve the secrets of Aldoria?
+
+Input Format
+
+First line: string sentence
+
+Second line: integer k
+
+Constraints
+
+1 ≤ length ≤ 1000 k ≥ 0
+
+Output Format
+
+Encrypted string
+
+Sample Input 0
+
+hello world
+2
+Sample Output 0
+
+lohel ldwor
+Sample Input 1
+
+python rocks
+3
+Sample Output 1
+
+honpyt cksro
+'''
+
+def rotate_word_right(word, k):
+    k %= len(word)  # Handle rotation greater than word length
+    return word[-k:] + word[:-k]
+
+sentence = input().strip()
+k = int(input().strip())
+
+words = sentence.split()
+rotated_words = [rotate_word_right(word, k) for word in words]
+
+print(' '.join(rotated_words))
