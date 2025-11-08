@@ -1,0 +1,62 @@
+'''
+n Green Valley School, attendance is tracked very carefully. Every day when a student enters the classroom, their name is recorded in the school’s system. Since this process is repeated for an entire week, some students’ names appear multiple times depending on how many days they attended. For example, Amit might come all five days, while John could attend only two. At the end of the week, the school administration wants to generate a summary report. The report should show how many times each student attended classes during that week. Once all the data is processed, the school also wants to highlight the most punctual student or group of students — the ones with the highest attendance count. This information will help the teachers reward consistent students and encourage others to improve their attendance.
+
+Input Format
+
+First line: integer N → number of attendance records Next N lines: StudentName
+
+Constraints
+
+1 ≤ N ≤ 1000 Names are case-sensitive strings (no spaces).
+
+Output Format
+
+1 ≤ N ≤ 1000 Names are case-sensitive strings (no spaces). If multiple students tie, print them in lexicographic order.
+
+Sample Input 0
+
+6
+Amit
+Rita
+Amit
+John
+Rita
+Amit
+Sample Output 0
+
+Amit attended 3 times
+Rita attended 2 times
+John attended 1 times
+Top attendee(s): Amit
+Sample Input 1
+
+4
+Meena
+Ravi
+Meena
+Ravi
+Sample Output 1
+
+Meena attended 2 times
+Ravi attended 2 times
+Top attendee(s): Meena Ravi
+'''
+
+from collections import OrderedDict
+
+N = int(input())
+attendance = OrderedDict()
+
+for _ in range(N):
+    name = input().strip()
+    if name not in attendance:
+        attendance[name] = 0
+    attendance[name] += 1
+
+for name, count in attendance.items():
+    print(f"{name} attended {count} times")
+
+max_count = max(attendance.values())
+top_attendees = [name for name, count in attendance.items() if count == max_count]
+
+print("Top attendee(s):", " ".join(sorted(top_attendees)))
