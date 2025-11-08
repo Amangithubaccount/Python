@@ -1,0 +1,71 @@
+'''
+An online shopping platform wants to track and summarize customer purchases. Every time a customer buys something, a transaction record is stored in the format: Customer Item Quantity PricePerItem The Customer is the name of the buyer. The Item is the product purchased. The Quantity is how many units were bought. The PricePerItem is the cost of one unit of the product. The company wants to create a report where:
+
+Each customer has their purchases grouped together.
+If a customer buys the same item multiple times, the quantity and total cost are accumulated.
+The cart details should be stored in the format:
+
+[[Item, TotalQuantity, TotalCost], ...]
+
+where TotalCost = Quantity × PricePerItem summed across all transactions for that item. The system must also compute the total bill for each customer.
+
+Input Format
+
+First line: integer N (number of transactions) Next N lines: Customer Item Quantity Price seperated by space
+
+Constraints
+
+1 ≤ N ≤ 200 1 ≤ Quantity, Price ≤ 100
+
+Output Format
+
+CustomerName cart detail TotalBill
+
+Sample Input 0
+
+5
+Alice Apple 2 10
+Bob Banana 3 5
+Alice Orange 1 20
+Charlie Apple 5 10
+Bob Banana 2 5
+Sample Output 0
+
+Alice [['Apple', 2, 10], ['Orange', 1, 20]] total:30
+Bob [['Banana', 5, 10]] total:10
+Charlie [['Apple', 5, 10]] total:10
+Sample Input 1
+
+3
+David Milk 2 10
+David Bread 3 5
+Eve Milk 1 20
+Sample Output 1
+
+David [['Milk', 2, 10], ['Bread', 3, 5]] total:15
+Eve [['Milk', 1, 20]] total:20
+'''
+
+from collections import OrderedDict
+
+N = int(input())
+customers = OrderedDict()
+
+for _ in range(N):
+    customer, item, quantity, price = input().split()
+    quantity, price = int(quantity), int(price)
+    
+    if customer not in customers:
+        customers[customer] = OrderedDict()
+    
+    if item not in customers[customer]:
+        customers[customer][item] = [0, 0]  # [total_quantity, total_cost]
+    
+    # Add quantity and price (price is total for that transaction)
+    customers[customer][item][0] += quantity
+    customers[customer][item][1] += price
+
+for customer, items in customers.items():
+    cart = [[item, qty_cost[0], qty_cost[1]] for item, qty_cost in items.items()]
+    total_bill = sum(qty_cost[1] for qty_cost in items.values())
+    print(f"{customer} {cart} total:{total_bill}")
