@@ -27,9 +27,15 @@ Sample Output 1
 hackathon
 '''
 
-# Sample input
-entries = ["hello", "world", "python", "rocks"]
-k = 2
+# Read input
+data = input().strip()
+# Expected format: ["hello","world","python","rocks"], 2
 
-# Output the k-th word
-print(entries[k])
+# Parse input into list and k
+words_str, k_str = data.split('],')
+words = [w.strip().strip('"') for w in words_str.strip('[]').split(',') if w.strip()]
+k = int(k_str.strip())
+
+# Print the k-th word
+print(words[k])
+
