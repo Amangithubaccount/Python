@@ -1,0 +1,19 @@
+#WAP that accepts the length of 3 sides of triangle as inputs.The program should indicate whether or not the 
+#triangle is a right angled triangle.Also find its area using HERONS FORMULA
+
+a=float(input("enter first side"))
+b=float(input("enter second side"))
+c=float(input("enter third side"))
+
+if a*a+b*b==c*c or a*a+c*c==b*b or b*b+c*c==a*a:
+    print("The triangle is a right angled triangle")
+else:
+    print("Triangle is not a right angled triangle")
+
+#HERONS FORMULA for calculating area of triangle
+
+s = (a + b + c) / 2
+area = (s*(s - a)*(s - b)*(s - c)) ** 0.5
+print("Area =", area)
+  
+
