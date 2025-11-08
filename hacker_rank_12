@@ -1,0 +1,47 @@
+'''
+On a distant voyage, the starship captain receives encrypted signals from allied ships. Each signal is divided into groups of letters, separated by the | symbol. The encryption rule is strange:
+
+If a group’s length is odd, the message has been shifted to the left by one character. To decode it, you must rotate it left once (move the first character to the end).
+If a group’s length is even, the message has been shifted to the right by one character. To decode it, you must rotate it right once (move the last character to the front).
+Your mission is to reconstruct the entire decoded message by applying the rule to each group and then joining them back with |.
+
+Input Format
+
+single line (groups separated by |).
+
+Constraints
+
+groups non-empty.
+
+Output Format
+
+transformed line.
+
+Sample Input 0
+
+abc|de|fghi
+Sample Output 0
+
+bca|ed|ifgh
+Sample Input 1
+
+x|yz
+Sample Output 1
+
+x|zy
+'''
+
+st = input().split('|')
+s=""
+lst=[]
+
+for word in st:
+    if len(word)%2==0:
+        word=word[-1]+word[:-1]
+        lst.append(word)
+        
+    else:
+        word=word[1:]+word[0]
+        lst.append(word)
+        
+print("|".join(lst))
