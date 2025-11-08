@@ -1,0 +1,103 @@
+'''
+In a peaceful town, the BookVerse Library keeps hundreds of books for readers. Members borrow books and return them after reading, but manual record-keeping often leads to errors. The librarian wants a digital tracker that can record which book is borrowed by which member. Each book has a title, author, and availability status. If a book is already borrowed, no other member should be able to borrow it. Your task is to automate the borrowing and returning process using object-oriented programming.
+
+Create class Library with methods:
+
+addBook(title, author) → Adds a book to the system
+
+borrowBook(member, title) → Allows member to borrow if available
+
+returnBook(member, title) → Returns a borrowed book
+
+getStatus(title) → Prints whether book is available or who borrowed it
+
+Input Format
+
+Q operation parameters
+
+Constraints
+
+1 ≤ Q ≤ 100
+
+Titles are unique
+
+A book can be borrowed by only one member at a time
+
+Output Format
+
+Print the result for each operation.
+
+Sample Input 0
+
+5
+addBook Python101 John
+borrowBook Amit Python101
+getStatus Python101
+returnBook Amit Python101
+getStatus Python101
+Sample Output 0
+
+Book added
+Book borrowed by Amit
+Borrowed by Amit
+Book returned
+Available
+'''
+
+
+class Library:
+    def __init__(self):
+        self.books = {}  # title -> {'author': ..., 'borrowed_by': None or member}
+
+    def addBook(self, title, author):
+        self.books[title] = {'author': author, 'borrowed_by': None}
+        print("Book added")
+
+    def borrowBook(self, member, title):
+        if title not in self.books:
+            print("Book not found")
+            return
+        if self.books[title]['borrowed_by'] is None:
+            self.books[title]['borrowed_by'] = member
+            print(f"Book borrowed by {member}")
+        else:
+            print(f"Book already borrowed by {self.books[title]['borrowed_by']}")
+
+    def returnBook(self, member, title):
+        if title not in self.books:
+            print("Book not found")
+            return
+        if self.books[title]['borrowed_by'] == member:
+            self.books[title]['borrowed_by'] = None
+            print("Book returned")
+        else:
+            print("Return failed")
+
+    def getStatus(self, title):
+        if title not in self.books:
+            print("Book not found")
+            return
+        borrower = self.books[title]['borrowed_by']
+        if borrower is None:
+            print("Available")
+        else:
+            print(f"Borrowed by {borrower}")
+
+# Handling input and operations
+Q = int(input())
+library = Library()
+for _ in range(Q):
+    parts = input().split()
+    op = parts[0]
+    if op == "addBook":
+        _, title, author = parts
+        library.addBook(title, author)
+    elif op == "borrowBook":
+        _, member, title = parts
+        library.borrowBook(member, title)
+    elif op == "returnBook":
+        _, member, title = parts
+        library.returnBook(member, title)
+    elif op == "getStatus":
+        _, title = parts
+        library.getStatus(title)
