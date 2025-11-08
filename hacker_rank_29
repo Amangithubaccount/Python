@@ -1,0 +1,65 @@
+'''
+In a small town, an election was organized to choose the student council president. Every student in the school cast their vote by writing down the name of their preferred candidate. These votes were then collected and stored in the school computer system, where each entry represented a single vote. As the day progressed, some candidates began to gain more popularity, while others received fewer votes. At the end of the voting process, the election committee wanted to prepare a detailed report. This report should show
+
+1)How many votes each candidate received in total.
+2)Finally, the system should also highlight the winner of the election — the candidate who received the highest number of votes.
+3)If two or more candidates received the same maximum votes, then all of them should be declared winners together. This way, the process remains transparent and fair for everyone.
+Input Format
+
+First line: integer N → number of votes Next N lines: CandidateName
+
+Constraints
+
+1 ≤ N ≤ 1000 Candidate names are case-sensitive strings (no spaces).
+
+Output Format
+
+Print each candidate and their vote count. Print the winner(s).
+
+Sample Input 0
+
+6
+A
+B
+A
+C
+B
+A
+Sample Output 0
+
+A got 3 votes
+B got 2 votes
+C got 1 votes
+Winner(s): A
+Sample Input 1
+
+4
+X
+Y
+X
+Y
+Sample Output 1
+
+X got 2 votes
+Y got 2 votes
+Winner(s): X Y
+'''
+
+from collections import OrderedDict
+
+N = int(input())
+votes = OrderedDict()
+
+for _ in range(N):
+    candidate = input().strip()
+    if candidate not in votes:
+        votes[candidate] = 0
+    votes[candidate] += 1
+
+for candidate, count in votes.items():
+    print(f"{candidate} got {count} votes")
+
+max_votes = max(votes.values())
+winners = [candidate for candidate, count in votes.items() if count == max_votes]
+
+print("Winner(s):", " ".join(sorted(winners)))
