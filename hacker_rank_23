@@ -1,0 +1,60 @@
+'''
+Beneath the golden sands of Ancient Kemet, Pharaoh Ramses sealed his most prized secrets in a vault of eternal stone. This vault is unlike any other—it does not open with keys or weapons, but with a password carved in strength.
+
+The vault’s mechanism is enchanted with layers of judgment. A weak password causes the walls to close, trapping intruders forever. A medium password grants entry only to false chambers filled with sand. A strong password may open minor treasure rooms, but only the very strong password awakens the true door to the Pharaoh’s hidden legacy.
+
+For centuries, priests studied the hieroglyphs that describe the rules of strength:
+
+Weak – Less than 8 characters, or missing most requirements.
+Medium – At least 8 characters, includes two types (uppercase, lowercase).
+Strong – At least 8 characters, includes three types (uppercase, lowercase, digit).
+Very Strong – At least 12 characters, includes all four types (uppercase, lowercase, digit, special).
+Only those with
+
+Input Format
+
+A single string.
+
+Constraints
+
+1 ≤ length ≤ 1000
+
+Output Format
+
+Very Strong or Strong or Medium or Weak
+
+Sample Input 0
+
+Abc123
+Sample Output 0
+
+Weak
+Sample Input 1
+
+Abcdefgh
+Sample Output 1
+
+Medium
+'''
+
+import string
+
+password = input().strip()
+
+length = len(password)
+has_upper = any(c.isupper() for c in password)
+has_lower = any(c.islower() for c in password)
+has_digit = any(c.isdigit() for c in password)
+special_chars = set(string.punctuation)
+has_special = any(c in special_chars for c in password)
+
+types_count = sum([has_upper, has_lower, has_digit, has_special])
+
+if length >= 12 and types_count == 4:
+    print("Very Strong")
+elif length >= 8 and types_count == 3:
+    print("Strong")
+elif length >= 8 and types_count >= 2:
+    print("Medium")
+else:
+    print("Weak")
