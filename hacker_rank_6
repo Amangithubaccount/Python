@@ -1,0 +1,44 @@
+'''
+Two spies exchange messages. If entire string is a palindrome (ignoring spaces/case), print PAL, else print the string with first and last characters swapped.
+
+Input Format
+
+single line S.
+
+Constraints
+
+1 ≤ len ≤ 200.
+
+Output Format
+
+either PAL or transformed string.
+
+Sample Input 0
+
+madam
+Sample Output 0
+
+PAL
+Sample Input 1
+
+step on no pets
+Sample Output 1
+
+PAL
+'''
+
+
+s = input()
+
+# Normalize for palindrome check
+normalized = s.replace(" ", "").lower()
+
+if normalized == normalized[::-1]:
+    print("PAL")
+else:
+    if len(s) == 1:
+        print(s)
+    else:
+        # Swap first and last characters
+        transformed = s[-1] + s[1:-1] + s[0]
+        print(transformed)
