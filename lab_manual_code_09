@@ -1,0 +1,20 @@
+#create a function max_of_three that takes three numbers as arguments and return the largest 
+#of them and also create a parameter function that checks whether a given number is armstrong or not. 
+'''armstrong logic:- 1234 : 1 raise to power 4, 2 raise to power 4, 3 raise to power 4, 4 raise to power 4, then sum of all
+no. of values in the string of number given, give it to the raise to the power of each number and then add all.
+'''
+def max_of_three(num1,num2,num3):
+    if num1>num2:
+        if num1>num3:
+            return num1
+        else:
+            return num3
+    else:
+        if num2>num3:
+            return num2
+        else:
+            return num3
+        
+num1,num2,num3=map(int,input("enter three numbers separated by spaces").split(' '))
+res=max_of_three(num1,num2,num3)
+print(res," is greatest of all")
