@@ -1,0 +1,61 @@
+'''
+In the Kingdom of Eldoria, the royal treasury stores its jewels in a long chest where each jewel has a unique number engraved on it.
+
+One day, the mischievous prince decided to play a game: he will ask the royal guards to swap jewels at specific positions. The guards must perform the swaps exactly as ordered, otherwise the King will know something is wrong.
+
+You, as the Chief Royal Coder, are tasked to simulate the swapping process. Task
+
+You are given an array of jewels (represented by integers).
+You are given a list of swap operations, where each operation consists of two positions (1-based indexing).
+After performing all swaps, output the final arrangement of jewels.
+example Walkthrough Suppose the chest contains jewels: [10, 20, 30, 40, 50] Swaps: Swap jewel at position 2 with position 5 → [10, 50, 30, 40, 20] Swap jewel at position 1 with position 3 → [30, 50, 10, 40, 20] Final Output: 30 50 10 40 20
+
+Input Format
+
+First line → n space-separated integers (jewel IDs). Second line → integer m (number of swap operations). Next m lines → two integers a b (positions of jewels to be swapped).
+
+Constraints
+
+1 ≤ n ≤ 10^5 Jewel IDs are unique integers. 1 ≤ m ≤ 10^4 1 ≤ a, b ≤ n
+
+Output Format
+
+Print the final arrangement of jewels after all swaps.
+
+Sample Input 0
+
+10 20 30 40 50
+2
+2 5
+1 3
+Sample Output 0
+
+[30, 50, 10, 40, 20]
+Sample Input 1
+
+1 2 3 4 5 6
+3
+1 6
+2 5
+3 4
+Sample Output 1
+
+[6, 5, 4, 3, 2, 1]
+'''
+
+# Read the list of jewel IDs
+jewels = list(map(int, input().split()))
+
+# Number of swap operations
+m = int(input())
+
+# Perform each swap
+for _ in range(m):
+    a, b = map(int, input().split())
+    # Convert 1-based indices to 0-based
+    a -= 1
+    b -= 1
+    jewels[a], jewels[b] = jewels[b], jewels[a]
+
+# Print the final arrangement as a list
+print(jewels)
