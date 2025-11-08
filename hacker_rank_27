@@ -1,0 +1,67 @@
+'''
+A city library maintains a record of books borrowed by readers. Each reader’s name is stored as a key in a dictionary, and the value is a list of books borrowed by that reader. Some readers may borrow the same book more than once. The librarian wants to prepare a report. She needs to calculate how many books each reader has borrowed in total and also determine the most borrowed book in the entire library. The system should print the total books borrowed by each reader and finally display the most popular book.
+
+Input Format
+
+First line: integer N → number of borrow entries Next N lines: ReaderName BookName
+
+Constraints
+
+1 ≤ N ≤ 1000 Reader names and book names are case-sensitive strings (no spaces). If multiple books tie as most borrowed, print all in lexicographic order.
+
+Output Format
+
+Print each reader and total books borrowed. Print the most borrowed book.
+
+Sample Input 0
+
+6
+Alice HarryPotter
+Bob Inferno
+Alice Inferno
+Charlie HarryPotter
+Alice HarryPotter
+Bob HarryPotter
+Sample Output 0
+
+Alice borrowed 3 books
+Bob borrowed 2 books
+Charlie borrowed 1 books
+Most borrowed book(s): HarryPotter
+Sample Input 1
+
+4
+Meena Twilight
+Ravi Twilight
+Ravi HarryPotter
+Meena HarryPotter
+Sample Output 1
+
+Meena borrowed 2 books
+Ravi borrowed 2 books
+Most borrowed book(s): HarryPotter Twilight
+'''
+
+
+from collections import defaultdict
+
+N = int(input())
+reader_books = defaultdict(list)
+book_count = defaultdict(int)
+
+for _ in range(N):
+    reader, book = input().split()
+    reader_books[reader].append(book)
+    book_count[book] += 1
+
+# Print total books borrowed by each reader in input order
+for reader in reader_books:
+    print(f"{reader} borrowed {len(reader_books[reader])} books")
+
+# Find the maximum borrow count
+max_count = max(book_count.values())
+
+# Find all books with the max count, sorted lexicographically
+most_borrowed = sorted(book for book, count in book_count.items() if count == max_count)
+
+print("Most borrowed book(s):", " ".join(most_borrowed))
