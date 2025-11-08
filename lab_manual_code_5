@@ -1,0 +1,30 @@
+#WAP to create a list of student's records and search a student record using dictionary. 
+
+stulist=[]
+num=int(input("enter number of students: "))
+for i in range (num):
+    d={}
+    rollno=int(input("enter rollnumber: "))
+    name=input("enter name")
+    branch=input("enter branch")
+    cgpa=input("enter cgpa")
+    email=input("enter email")
+    d["rollno"]=rollno
+    d["name"]=name
+    d["branch"]=branch
+    d["cgpa"]=cgpa
+    d["email"]=email
+    stulist.append(d)
+    
+
+    
+for student in stulist:
+    for i in student:
+        print(i, "=>  ",student[i],end="   ")
+    print()
+    
+rno=int(input("enter rollno to search the record"))
+for student in stulist:
+    for i in student:
+        if student[i]==rno:
+            print(student)
