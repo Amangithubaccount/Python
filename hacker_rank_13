@@ -1,0 +1,49 @@
+'''
+In a high-security research facility, scientists protect their laboratories with digital safes. Each safe opens only when the entered code follows strict security rules. The guards discovered that weaker codes (like all lowercase or all digits) were easy to crack, so the facility upgraded its system.
+
+Now, for a code to be accepted as VALID, it must satisfy all of the following rules:
+
+The code length must be between 6 and 12 characters (inclusive).
+It must contain at least one digit (0–9).
+It must contain at least one uppercase letter (A–Z).
+It must contain at least one lowercase letter (a–z).
+If any of these rules are broken, the system flashes INVALID and rejects the code. Your job is to write the safe’s validation logic to help the facility ensure only strong codes are used.
+
+Input Format
+
+A single string representing the code.
+Constraints
+
+Only ASCII letters and digits are considered.
+Length of code ≤ 100.
+Output Format
+
+VALID if the code satisfies all the rules, otherwise INVALID.
+Sample Input 0
+
+Abc123
+Sample Output 0
+
+VALID
+Sample Input 1
+
+abc123
+Sample Output 1
+
+INVALID
+'''
+
+code = input()
+
+# Check length constraint
+if not (6 <= len(code) <= 12):
+    print("INVALID")
+else:
+    has_digit = any(c.isdigit() for c in code)
+    has_upper = any(c.isupper() for c in code)
+    has_lower = any(c.islower() for c in code)
+
+    if has_digit and has_upper and has_lower:
+        print("VALID")
+    else:
+        print("INVALID")
