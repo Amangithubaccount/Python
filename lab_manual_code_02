@@ -1,0 +1,21 @@
+# write a program to perform searching activity using binary search.
+
+#binary search
+n=int(input("enter the limit")) #taking limit
+arr=list(map(int,input(f"enter {n} numbers step by step").split(" ")))
+arr.sort()
+print(arr)
+num=int(input("enter the number u want to search"))
+min_idx=0
+max_idx=len(arr)-1
+while(min_idx<=max_idx):
+    mid_idx=(min_idx + max_idx)//2
+    if num==arr[mid_idx]:
+        print(f"number found at index number {mid_idx}")
+        break
+    elif num>arr[mid_idx]:
+        min_idx=mid_idx+1
+    else:
+        max_idx=mid_idx-1
+else:
+    print("number is not in the list")
