@@ -1,0 +1,28 @@
+# database of students 
+
+database=[]
+
+def createDatabase():
+    count=int(input("enter the number of students"))
+    for i in range(count):
+        sid=int(input("enter the student's id"))
+        name=input("enter student's name")
+        branch=input("enter branch name")
+        sem=int(input("enter semester"))
+        email=input("enter student's email")
+        
+        record=(sid,name,branch,sem,email)
+        database.append(record)
+        
+def printRecords():
+    print("student database".center(60,"-"))
+    print(f"{'sid':<10}{'name':<15}{'branch':<10}{'sem':<5}{'email':<20}")
+    print("".center(60,"-"))
+    for record in database:
+        print(f"{record[0]:<10}{record[1]:<15}{record[2]:<10}{record[3]:<5}{record[4]:<20}")
+        
+    print("".center(60,"-"))
+
+createDatabase() 
+printRecords()
+
