@@ -1,0 +1,81 @@
+'''
+Centuries ago, in the Great Library of Alexandria, thousands of scrolls were meticulously arranged in numerical order by the royal scholars. One day, a fire broke out and the scholars hurriedly evacuated. Now, in 2025, archaeologists have rediscovered part of the library’s underground chamber.
+
+The chamber contains a list of scroll IDs (sorted in ascending order). Each scroll ID is a unique number. However, the chamber is dangerous — explorers have only a few seconds to find the exact scroll before the traps activate.
+
+Your job is to help the archaeologists by writing a Python program using binary search to:
+
+Determine if the target scroll ID exists in the chamber.
+
+If it exists, return the position (1-based index) of the scroll.
+
+If it does not exist, return the nearest smaller scroll ID and the nearest larger scroll ID (if available).
+
+This way, archaeologists know exactly where to dig, even if the exact scroll is missing.
+
+Input Format
+
+First line: n space-separated integers (sorted scroll IDs).
+
+Second lines: n space-separated integers contains a scroll ID to search.
+
+Constraints
+
+1 <= n <= 10^5
+
+Scroll IDs are unique and sorted.
+
+Queries up to 10^4.
+
+Binary search must be used (not linear search).
+
+Output Format
+
+For each query:
+
+If found → Found at position p (1-based index).
+
+If not found → Closest scrolls: smaller = x, larger = y (print "None" if not available).
+
+Sample Input 0
+
+5 12 19 27 34 56 78 90 101 150
+19 20 200
+Sample Output 0
+
+Found at position 3
+Closest scrolls:smaller=19,larger=27
+Closest scrolls:smaller=150,larger=None
+Sample Input 1
+
+2 4 6 8 10
+2 9
+Sample Output 1
+
+Found at position 1
+Closest scrolls:smaller=8,larger=10
+'''
+
+from bisect import bisect_left
+
+def find_scroll_positions(scrolls, queries):
+    results = []
+    for target in queries:
+        pos = bisect_left(scrolls, target)
+        if pos < len(scrolls) and scrolls[pos] == target:
+            # Found
+            results.append(f"Found at position {pos+1}")
+        else:
+            # Not found
+            smaller = scrolls[pos-1] if pos > 0 else None
+            larger = scrolls[pos] if pos < len(scrolls) else None
+            results.append(f"Closest scrolls:smaller={smaller},larger={larger}")
+    return results
+
+# Example usage based on the sample inputs
+scrolls = list(map(int, input().split()))
+queries = list(map(int, input().split()))
+
+results = find_scroll_positions(scrolls, queries)
+for res in results:
+    print(res)
