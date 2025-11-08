@@ -1,0 +1,17 @@
+# write a program to perform searching activity using linear and binary search.
+
+#linear search
+n=int(input("enter the limit"))
+arr=[]
+for i in range(n):
+    num=int(input("enter a num"))
+    arr.append(num)
+    
+print(arr)
+ele=int(input("enter a number to search in array"))
+for e in range(len(arr)):
+    if arr[e]==ele:
+        print(f"printed element found at index number {e}")
+        break
+else:
+    print("element not found")
