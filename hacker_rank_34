@@ -1,0 +1,87 @@
+'''
+A new restaurant, TastyBite, is launching its own online ordering platform. Customers can browse menu items and place orders. Each dish has a name and price. Customers can order multiple items, and the system should calculate their total bill. If a customer orders an item that doesn’t exist, the system should show an error. You need to design a class that supports item addition, ordering, and billing.
+
+Create class Restaurant with:
+
+addItem(name, price)
+
+orderItem(customer, name)
+
+getBill(customer)
+
+Input Format
+
+Q operation details
+
+Constraints
+
+1 ≤ Q ≤ 100
+
+1 ≤ price ≤ 1000
+
+Output Format
+
+Print appropriate messages for each command.
+
+Sample Input 0
+
+6
+addItem Pizza 250
+addItem Burger 150
+orderItem Ram Pizza
+orderItem Ram Burger
+getBill Ram
+getBill Riya
+Sample Output 0
+
+Item added
+Item added
+Ordered Pizza
+Ordered Burger
+Total bill for Ram: 400
+No orders found for Riya
+'''
+
+
+class Restaurant:
+    def __init__(self):
+        self.menu = {}          # item_name -> price
+        self.orders = {}        # customer -> list of item prices ordered
+
+    def addItem(self, name, price):
+        self.menu[name] = int(price)
+        print("Item added")
+
+    def orderItem(self, customer, name):
+        if name not in self.menu:
+            print("Item not found")
+            return
+        if customer not in self.orders:
+            self.orders[customer] = []
+        self.orders[customer].append(self.menu[name])
+        print(f"Ordered {name}")
+
+    def getBill(self, customer):
+        if customer not in self.orders or not self.orders[customer]:
+            print(f"No orders found for {customer}")
+        else:
+            total = sum(self.orders[customer])
+            print(f"Total bill for {customer}: {total}")
+
+# Input handling
+Q = int(input())
+restaurant = Restaurant()
+
+for _ in range(Q):
+    parts = input().split()
+    cmd = parts[0]
+
+    if cmd == "addItem":
+        _, name, price = parts
+        restaurant.addItem(name, price)
+    elif cmd == "orderItem":
+        _, customer, name = parts
+        restaurant.orderItem(customer, name)
+    elif cmd == "getBill":
+        _, customer = parts
+        restaurant.getBill(customer)
