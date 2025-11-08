@@ -1,0 +1,22 @@
+# Experiment2) wap to illustrate iteration over list and dictionary
+
+lst=["c","cpp","js","php","python"]
+print(lst)
+print("items of list:-")
+for i in lst:
+    print(i)
+    
+d={"R":"Red","G":"Green","B":"Blue","C":"Cyan"}
+print(d)
+
+print("keys of dictionary:-")
+for key in d.keys():
+    print(key,end=" ")
+    
+print("values of dictionary")
+for value in d.values():
+    print(value,end=" ")
+    
+print("items of dictionary:-")
+for item in d.items():
+    print(item,end=" ")
